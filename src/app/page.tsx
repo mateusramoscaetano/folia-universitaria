@@ -244,7 +244,7 @@ export default function Home() {
           alt="atracoes"
           width={1000}
           height={607}
-          className="-mt-15 scale-150 relative z-30 object-cover -ml-6 xmd:-ml-10"
+          className="-mt-8 md:-mt-15 scale-150 relative z-30 object-cover -ml-6 xmd:-ml-10"
         />
       </div>
 
