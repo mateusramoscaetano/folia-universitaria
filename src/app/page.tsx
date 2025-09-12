@@ -58,7 +58,7 @@ export default function Home() {
           CuritibaFolia
         </h1>
 
-        <div className="mt-5 shadow-xs shadow-white  border-white flex flex-col items-center px-0 pt-8 pb-10 rounded-[50px] min-h-full w-full backdrop-blur-xs z-20 max-w-[1216px] bg-transparent relative">
+        <div className="mt-5 shadow-xs shadow-white  border-white flex flex-col items-center px-0 pt-8 pb-10 rounded-[50px] min-h-full w-full backdrop-blur-xs  max-w-[1216px] bg-transparent relative overflow-hidden z-40">
           {/* <Image
             src="/elemento-web.png"
             alt="logo"
@@ -67,13 +67,9 @@ export default function Home() {
             className="absolute -top-40 left-0 -z-10"
           /> */}
           <div className="flex flex-col items-center justify-center overflow-hidden">
-            <Image
-              src="/04.OUT.svg"
-              alt="04.OUT"
-              width={165}
-              height={124}
-              className="-mt-8 md:w-[358px] md:h-auto"
-            />
+            <h1 className="text-yellow-folia font-montserrat font-extrabold md:text-[64px] text-[32px] mb-5 md:mb-10">
+              04.OUT
+            </h1>
             <p className="text-yellow-folia  font-codec-cold font-bold text-center tracking-tight leading-normal -mt-3 text-xs px-4 md:text-2xl">
               O Folia Universitária chega para transformar a forma como os
               formandos vivem o <br /> CuritibaFolia. Essa não é só a maior
@@ -89,7 +85,7 @@ export default function Home() {
               className="-mt-4 md:w-[358px] md:h-auto"
             />
 
-            <div className="flex flex-col items-center justify-center  -mt-5 md:-mt-10 w-full text-[13px] md:text-2xl">
+            <div className="flex flex-col items-center justify-center  -mt-5 md:-mt-15 w-full text-[13px] md:text-2xl">
               <div className="flex items-center justify-center font-codec-warm  text-white font-bold">
                 <Image
                   src="/estrela.png"
@@ -176,7 +172,7 @@ export default function Home() {
                 className="-mt-4 md:w-[358px] md:h-auto"
               />
 
-              <div className="flex items-center justify-center font-codec-warm  text-white font-bold -mt-6">
+              <div className="flex items-center justify-center font-codec-warm  text-white font-bold -mt-5 md:-mt-15">
                 <Image
                   src="/estrela.png"
                   alt="estrela"
@@ -234,7 +230,7 @@ export default function Home() {
                 <p className="text-center text-blue-folia font-codec-warm font-extrabold leading-tight">
                   Esse pré-cadastro garante sua prioridade nessa experiência!
                 </p>
-                <button className="bg-blue-folia text-white font-codec-warm font-extrabold leading-tight h-[50px] md:h-[58px] w-full mt-6 py-2 px-4 rounded-[10px] text-lg max-w-[350px]">
+                <button className="bg-blue-folia text-white font-codec-warm font-extrabold leading-tight h-[50px] md:h-[58px] w-full mt-2 md:mt-6 py-2 px-4 rounded-[10px] text-lg max-w-[350px]  transition-all duration-300 hover:scale-105 cursor-pointer z-30">
                   Garantir meu Pré Cadastro
                 </button>
               </div>
@@ -242,13 +238,13 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full  flex items-center justify-center">
+      <div className="w-full  flex items-center justify-center ">
         <Image
           src="/atracoes.svg"
           alt="atracoes"
           width={1000}
           height={607}
-          className="-mt-15 scale-150 relative z-30 object-cover -ml-6 xmd:ml-0"
+          className="-mt-15 scale-150 relative z-30 object-cover -ml-6 xmd:-ml-10"
         />
       </div>
 
