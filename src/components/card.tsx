@@ -1,6 +1,6 @@
 export default function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mt-5 shadow-xs shadow-white max-w-xl  border-white flex flex-col items-center px-0 pt-8 pb-10 rounded-[50px] min-h-full w-full backdrop-blur-xs  max-w-[1216px] bg-transparent relative overflow-hidden z-40">
+    <div className="mt-5 shadow-xs shadow-white   border-white flex flex-col items-center px-0 pt-8 pb-10 rounded-[50px] min-h-full w-full backdrop-blur-xs  max-w-[1216px] bg-transparent relative overflow-hidden z-40">
       <CardHeader />
       {children}
     </div>
