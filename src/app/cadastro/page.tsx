@@ -7,7 +7,7 @@ import { cleanWhatsApp, cleanCPF } from "@/lib/masks";
 import { useRouter } from "next/navigation";
 
 interface FormData {
-  nome: string;
+  name: string;
   email: string;
   cpf: string;
   whatsapp: string;
@@ -16,13 +16,14 @@ interface FormData {
 export default function Cadastro() {
   const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
-    nome: "",
+    name: "",
     email: "",
     cpf: "",
     whatsapp: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -37,22 +38,44 @@ export default function Cadastro() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage("");
 
     try {
       const cleanedData = {
-        nome: formData.nome.trim(),
+        name: formData.name.trim(),
         email: formData.email.trim(),
         cpf: cleanCPF(formData.cpf),
         whatsapp: cleanWhatsApp(formData.whatsapp),
       };
 
-      console.log("Dados limpos para envio:", cleanedData);
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}?token=${process.env.NEXT_PUBLIC_TOKEN}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_BEARER_TOKEN}`,
+          },
+          body: JSON.stringify(cleanedData),
+        }
+      );
 
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const result = await response.json();
 
-      router.push("/sucesso");
+      if (result.summary.process) {
+        router.push("/sucesso");
+      } else {
+        if (result.error === "not-adered") {
+          setErrorMessage(
+            "Não encontramos seu nome na base de formandos da Formô. Por isso, seu pré-cadastro não foi concluído. Caso você seja formando, entre em contato com nosso atendimento."
+          );
+        } else {
+          setErrorMessage("Erro ao processar seu cadastro. Tente novamente.");
+        }
+      }
     } catch (error) {
       console.error("Erro ao enviar formulário:", error);
+      setErrorMessage("Erro ao processar seu cadastro. Tente novamente.");
     } finally {
       setIsSubmitting(false);
     }
@@ -75,9 +98,9 @@ export default function Cadastro() {
         >
           <Input
             type="text"
-            id="nome"
-            name="nome"
-            value={formData.nome}
+            id="name"
+            name="name"
+            value={formData.name}
             onChange={handleInputChange}
             placeholder="Digite seu nome completo"
             required
@@ -120,6 +143,13 @@ export default function Cadastro() {
             </button>
           </div>
         </form>
+        {errorMessage && (
+          <div className="w-full flex items-center justify-center mt-4">
+            <p className="text-white text-sm text-center font-bold  px-4">
+              {errorMessage}
+            </p>
+          </div>
+        )}
       </div>
     </>
   );
