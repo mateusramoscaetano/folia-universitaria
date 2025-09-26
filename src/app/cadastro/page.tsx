@@ -11,6 +11,7 @@ interface FormData {
   email: string;
   cpf: string;
   whatsapp: string;
+  isGuest?: string;
 }
 
 export default function Cadastro() {
@@ -24,6 +25,7 @@ export default function Cadastro() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isNotGraduate, setIsNotGraduate] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -33,6 +35,17 @@ export default function Cadastro() {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setIsNotGraduate(checked);
+    if (!checked) {
+      setFormData((prev) => ({
+        ...prev,
+        isGuest: undefined,
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,6 +59,7 @@ export default function Cadastro() {
         email: formData.email.trim(),
         cpf: cleanCPF(formData.cpf),
         whatsapp: cleanWhatsApp(formData.whatsapp),
+        ...(formData.isGuest && { isGuest: formData.isGuest }),
       };
 
       const response = await fetch(
@@ -132,6 +146,38 @@ export default function Cadastro() {
             onChange={handleInputChange}
             required
           />
+
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="isNotGraduate"
+              checked={isNotGraduate}
+              onChange={handleCheckboxChange}
+              className="w-4 h-4 text-blue-folia bg-white border-gray-300 rounded focus:ring-blue-folia focus:ring-2"
+            />
+            <label
+              htmlFor="isNotGraduate"
+              className="text-white text-sm font-bold"
+            >
+              Não sou formando ainda
+            </label>
+          </div>
+
+          {isNotGraduate && (
+            <div className="w-full">
+              <select
+                name="isGuest"
+                value={formData.isGuest || ""}
+                onChange={handleInputChange}
+                required
+                className="w-full bg-white text-gray-900 border border-gray-300 rounded-[12px] px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-folia"
+              >
+                <option value="">Selecione uma opção</option>
+                <option value="commercial">Comercial</option>
+                <option value="guest">Convidado</option>
+              </select>
+            </div>
+          )}
 
           <div className="w-full flex items-center justify-center">
             <button
