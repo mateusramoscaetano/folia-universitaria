@@ -12,6 +12,7 @@ interface FormData {
   cpf: string;
   whatsapp: string;
   isGuest?: string;
+  gradeOrName?: string;
 }
 
 export default function Cadastro() {
@@ -44,6 +45,7 @@ export default function Cadastro() {
       setFormData((prev) => ({
         ...prev,
         isGuest: undefined,
+        gradeOrName: undefined,
       }));
     }
   };
@@ -60,6 +62,9 @@ export default function Cadastro() {
         cpf: cleanCPF(formData.cpf),
         whatsapp: cleanWhatsApp(formData.whatsapp),
         ...(formData.isGuest && { isGuest: formData.isGuest }),
+        ...(formData.gradeOrName && {
+          gradeOrName: formData.gradeOrName.trim(),
+        }),
       };
 
       const response = await fetch(
@@ -159,12 +164,12 @@ export default function Cadastro() {
               htmlFor="isNotGraduate"
               className="text-white text-sm font-bold"
             >
-              Não sou formando ainda
+              Não sou Formô ainda
             </label>
           </div>
 
           {isNotGraduate && (
-            <div className="w-full">
+            <div className="w-full space-y-4">
               <select
                 name="isGuest"
                 value={formData.isGuest || ""}
@@ -173,9 +178,26 @@ export default function Cadastro() {
                 className="w-full bg-white text-gray-900 border border-gray-300 rounded-[12px] px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-folia"
               >
                 <option value="">Selecione uma opção</option>
-                <option value="commercial">Comercial</option>
-                <option value="guest">Convidado</option>
+                <option value="commercial">Convidado Comercial</option>
+                <option value="guest">Acompanhante Formando</option>
               </select>
+
+              {(formData.isGuest === "commercial" ||
+                formData.isGuest === "guest") && (
+                <Input
+                  type="text"
+                  id="gradeOrName"
+                  name="gradeOrName"
+                  value={formData.gradeOrName || ""}
+                  onChange={handleInputChange}
+                  placeholder={
+                    formData.isGuest === "commercial"
+                      ? "Digite sua turma"
+                      : "Digite o nome do formando"
+                  }
+                  required
+                />
+              )}
             </div>
           )}
 
