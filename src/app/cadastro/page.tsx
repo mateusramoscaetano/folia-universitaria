@@ -178,8 +178,8 @@ export default function Cadastro() {
                 className="w-full bg-white text-gray-900 border border-gray-300 rounded-[12px] px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-folia"
               >
                 <option value="">Selecione uma opção</option>
-                <option value="commercial">Convidado Comercial</option>
-                <option value="guest">Acompanhante Formando</option>
+                <option value="commercial">Convidado do Comercial</option>
+                <option value="guest">Acompanhante do Formando</option>
               </select>
 
               {(formData.isGuest === "commercial" ||
@@ -193,7 +193,7 @@ export default function Cadastro() {
                   placeholder={
                     formData.isGuest === "commercial"
                       ? "Digite sua turma"
-                      : "Digite o nome do formando"
+                      : "Digite o nome do formando que você está acompanhando"
                   }
                   required
                 />
