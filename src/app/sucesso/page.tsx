@@ -1,8 +1,10 @@
+import { CardHeader } from "@/components/card";
 import Image from "next/image";
 
 export default function Sucesso() {
   return (
     <>
+      <CardHeader />
       <svg
         width="73"
         height="73"

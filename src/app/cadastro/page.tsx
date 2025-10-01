@@ -5,6 +5,7 @@ import Input from "@/components/input";
 import WhatsAppInput from "@/components/whatsapp-input";
 import { cleanWhatsApp, cleanCPF } from "@/lib/masks";
 import { useRouter } from "next/navigation";
+import { CardHeader } from "@/components/card";
 
 interface FormData {
   name: string;
@@ -102,6 +103,7 @@ export default function Cadastro() {
 
   return (
     <>
+      <CardHeader />
       <h1 className="text-white mt-3  text-xl mb-3  font-bold tracking-tight text-center">
         Voce está quase lá!
       </h1>
