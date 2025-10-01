@@ -1,6 +1,6 @@
 export function HowItWorks() {
   return (
-    <div className="mt-6 flex flex-col items-center justify-center font-codec-warm text-center gap-5">
+    <div className="mt-6 flex flex-col items-center justify-center font-codec-warm text-center gap-5 lg:max-w-[600px]">
       <div className="flex flex-col items-center justify-center gap-2 px-3 text-sm">
         <h2 className="text-xl font-extrabold text-yellow-folia">
           COMO FUNCIONARÁ O ACESSO?

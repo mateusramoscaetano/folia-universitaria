@@ -58,7 +58,7 @@ export default function FAQ() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center font-codec-warm text-white text-lg gap-4 px-4">
+      <div className="flex flex-col items-center justify-center font-codec-warm text-white text-lg gap-4 px-4 lg:max-w-[600px]">
         <div className="text-center lg:max-w-[600px]">
           <span className="font-extrabold">
             Agora falta pouco para vivermos o melhor dia do ano!
