@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function HowItWorks() {
   return (
     <div className="mt-6 flex flex-col items-center justify-center font-codec-warm text-center gap-5 lg:max-w-[600px]">
@@ -17,6 +19,10 @@ export function HowItWorks() {
         <h2 className="text-xl font-extrabold text-yellow-folia">
           PRECISO PAGAR ALGUMA COISA?
         </h2>
+
+        <div className="hidden">
+          <Image src="/infos.jpg" alt="logo-dunna" width={100} height={100} />
+        </div>
 
         <p className="text-sm font-bold">
           O acesso ao Curitiba Folia se dará através do QR Code que você recebeu
