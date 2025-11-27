@@ -34,11 +34,11 @@ export default function RootLayout({
               FORMÔ APRESENTA
             </h1>
             <Image
-              src="/logo-folia-web.svg"
-              alt="logo"
+              src="/embaixador.png"
+              alt="embaixador"
               width={215}
               height={142}
-              className="mt-10 md:w-[433px] md:h-auto"
+              className="mt-10 md:w-[433px] md:h-auto mb-10"
             />
 
             <Card>{children}</Card>
@@ -50,7 +50,7 @@ export default function RootLayout({
               alt="logo-formo"
               width={122}
               height={122}
-              className="mt-10 overflow-hidden relative z-30  "
+              className=" overflow-hidden relative z-30  "
             />
           </div>
         </div>
