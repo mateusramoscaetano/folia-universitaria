@@ -142,7 +142,7 @@ export default function Home() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-blue-folia text-white max-w-[200px] md:max-w-[267px]   items-center justify-center flex h-[33px] md:h-[33px] py-2 px-4 rounded-[12px] text-sm transition-all duration-300 hover:scale-105 cursor-pointer z-30 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[#83723c] text-white max-w-[200px] md:max-w-[267px]   items-center justify-center flex h-[33px] md:h-[33px] py-2 px-4 rounded-[12px] text-sm transition-all duration-300 hover:scale-105 cursor-pointer z-30 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? "Enviando..." : "Cadastrar"}
             </button>
