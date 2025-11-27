@@ -1,135 +1,160 @@
-import Card from "@/components/card";
-import Image from "next/image";
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
+import Input from "@/components/input";
+import WhatsAppInput from "@/components/whatsapp-input";
+import { cleanWhatsApp, cleanCPF } from "@/lib/masks";
+import { useRouter } from "next/navigation";
+import { CardHeader } from "@/components/card";
+
+interface FormData {
+  name: string;
+  email: string;
+  cpf: string;
+  whatsapp: string;
+  isGuest?: string;
+  gradeOrName?: string;
+}
 
 export default function Home() {
+  const router = useRouter();
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    cpf: "",
+    whatsapp: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isNotGraduate, setIsNotGraduate] = useState(false);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage("");
+
+    try {
+      const cleanedData = {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        cpf: cleanCPF(formData.cpf),
+        whatsapp: cleanWhatsApp(formData.whatsapp),
+      };
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}?token=${process.env.NEXT_PUBLIC_TOKEN}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_BEARER_TOKEN}`,
+          },
+          body: JSON.stringify(cleanedData),
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.summary.process) {
+        router.push("/sucesso");
+      } else {
+        if (result.error === "not-adered") {
+          setErrorMessage(
+            "Não encontramos seu nome na base de formandos da Formô. Por isso, seu pré-cadastro não foi concluído. Caso você seja formando, entre em contato com nosso atendimento."
+          );
+        } else {
+          setErrorMessage("Erro ao processar seu cadastro. Tente novamente.");
+        }
+      }
+    } catch (error) {
+      console.error("Erro ao enviar formulário:", error);
+      setErrorMessage("Erro ao processar seu cadastro. Tente novamente.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
-      <div className="flex flex-col items-center justify-center overflow-hidden">
-        <h1 className="text-yellow-folia font-montserrat font-extrabold md:text-[64px] text-[32px] mb-5 md:mb-10">
-          04.OUT
-        </h1>
-        <p className="text-yellow-folia  font-codec-cold font-bold text-center tracking-tight leading-normal -mt-3 text-xs px-4 md:text-2xl">
-          O Folia Universitária chega para transformar a forma como os formandos
-          vivem o <br /> CuritibaFolia. Essa não é só a maior micareta do
-          Paraná, é uma experiência exclusiva <br /> para quem é Formô, com:
-        </p>
+      <CardHeader />
+      <h1 className="text-white mt-3  text-xl mb-3  font-bold tracking-tight text-center">
+        Voce está quase lá!
+      </h1>
 
-        <Image
-          src="/ESQUENTA.svg"
-          alt="ESQUENTA"
-          width={191}
-          height={107}
-          className="-mt-4 md:w-[358px] md:h-auto"
-        />
+      <p className="text-white  font-bold text-sm md:text-base mb-2 text-center max-w-[250px]">
+        Preencha os dados abaixo para garantir sua vaga no sorteio.
+      </p>
 
-        <div className="flex flex-col items-center justify-center  -mt-5 md:-mt-15 w-full text-[13px] md:text-2xl">
-          <div className="flex items-center justify-center   text-white font-bold">
-            <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-            <div className="flex items-center justify-center">
-              <div className="flex items-center justify-center mt-1">
-                Dunna Club
-              </div>
-              <Image
-                src="/logo-dunna.svg"
-                alt="logo-dunna"
-                width={34}
-                height={16}
-                className="ml-4 scale-125"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-center   text-white font-bold -mt-2">
-            <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-            <div className="flex items-center justify-center mr-2 mt-1">
-              Open Bar Exclusivo
-            </div>
-          </div>
-
-          <div className="flex items-center justify-center   text-white font-bold -mt-2">
-            <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-            <div className="flex items-center justify-center mr-2 mt-1">
-              Djs Especiais
-            </div>
-          </div>
-
-          <div className="flex items-center justify-center   text-white font-bold -mt-2">
-            <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-            <div className="flex items-center justify-center">
-              <div className="flex items-center justify-center mt-1">
-                Espaço Beleza By Torriton
-              </div>
-              <Image
-                src="/logo-torriton.svg"
-                alt="logo-torriton"
-                width={56}
-                height={10}
-                className="ml-4"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-center   text-white font-bold -mt-2">
-            <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-            <div className="flex items-center justify-center mr-2 mt-1">
-              Translado do esquenta ao evento
-            </div>
-          </div>
-
-          <Image
-            src="/CURITIBAFOLIA.svg"
-            alt="CURITIBAFOLIA"
-            width={195}
-            height={110}
-            className="-mt-4 md:w-[358px] md:h-auto"
+      <div className="w-full  mt-8 px-4 flex flex-col items-center justify-center">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6 w-full max-w-[267px] md:max-w-[360px]"
+        >
+          <Input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            placeholder="Digite seu nome completo"
+            required
           />
 
-          <div className="flex items-center justify-center  text-white font-bold -mt-5 md:-mt-15">
-            <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-            <div className="flex items-center justify-center mr-2 mt-1">
-              Fila Diferenciada
-            </div>
-          </div>
+          <Input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="Email"
+            required
+          />
 
-          <div className="flex items-center justify-center   text-white font-bold -mt-2">
-            <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-            <div className="flex items-center justify-center mr-2 mt-1">
-              Pulseira especial
-            </div>
-          </div>
+          <Input
+            type="text"
+            id="cpf"
+            name="cpf"
+            value={formData.cpf}
+            onChange={handleInputChange}
+            placeholder="000.000.000-00"
+            mask="cpf"
+            required
+          />
 
-          <div className="flex items-center justify-center   text-white font-bold -mt-2">
-            <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-            <div className="flex items-center justify-center tracking-tight mt-1">
-              Área premium Formô com ativações e lounge
-            </div>
-          </div>
+          <WhatsAppInput
+            value={formData.whatsapp}
+            onChange={handleInputChange}
+            required
+          />
 
-          <div className="flex items-center justify-center   text-white font-bold -mt-2">
-            <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-            <div className="flex items-center justify-center mr-2 mt-1">
-              Mais surpresas
-            </div>
-          </div>
-          <div className="flex flex-col items-center justify-center gap-8 px-4 text-center text-xs md:text-[16px]">
-            <h2 className="text-center text-blue-folia  font-extrabold leading-tight tracking-tight mt-6">
-              Não é só a experiência em uma das maiores micaretas do Brasil, é a
-              chance de viver essa experiência de um jeito único, com <br />
-              vantagens que ninguém mais terá.
-            </h2>
-
-            <p className="text-center text-blue-folia  font-extrabold leading-tight">
-              Esse pré-cadastro garante sua prioridade nessa experiência!
-            </p>
-            <Link
-              href="/cadastro"
-              className="bg-blue-folia text-white  font-extrabold leading-tight h-[50px] md:h-[58px] w-full mt-2 md:mt-6 py-2 px-4 rounded-[10px] text-lg max-w-[350px] transition-all duration-300 hover:scale-105 cursor-pointer z-30 flex items-center justify-center"
+          <div className="w-full flex items-center justify-center">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-blue-folia text-white max-w-[200px] md:max-w-[267px]   items-center justify-center flex h-[33px] md:h-[33px] py-2 px-4 rounded-[12px] text-sm transition-all duration-300 hover:scale-105 cursor-pointer z-30 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Garantir meu Pré Cadastro
-            </Link>
+              {isSubmitting ? "Enviando..." : "Cadastrar"}
+            </button>
           </div>
-        </div>
+        </form>
+        {errorMessage && (
+          <div className="w-full flex items-center justify-center mt-4">
+            <p className="text-white text-sm text-center font-bold  px-4">
+              {errorMessage}
+            </p>
+          </div>
+        )}
       </div>
     </>
   );

@@ -16,3 +16,41 @@
 .font-codec-warm {
   font-family: var(--font-codec-warm);
 }
+
+@keyframes golden-shimmer {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.golden-glow {
+  background: linear-gradient(
+    to bottom,
+    #000000 0%,
+    #000000 20%,
+    #000000 40%,
+    rgb(42, 33, 14) 60%,
+    rgb(60, 50, 24) 80%,
+    rgb(131, 114, 60) 100%
+  );
+  position: relative;
+}
+
+.golden-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 60%,
+    rgba(255, 215, 0, 0.15) 80%,
+    rgba(255, 215, 0, 0.3) 100%
+  );
+  animation: golden-shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}

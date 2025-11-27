@@ -23,111 +23,19 @@ export default function Sucesso() {
         />
       </svg>
 
-      <h1 className="text-white text-2xl md:text-4xl  font-bold tracking-tight mb-4">
-        Seu pré-cadastro foi confirmado!
+      <h1 className="text-white text-2xl md:text-4xl  font-bold tracking-tight mb-4 text-center">
+        Sua participação no sorteio foi confirmada!
       </h1>
       <h1 className="text-white text-2xl md:text-4xl  font-bold tracking-tight mb-4">
-        04 OUT | 12H - 23H
+        EMBAIXADOR CLASSIC
+      </h1>
+      <h1 className="text-white text-2xl md:text-4xl  font-bold tracking-tight mb-4 text-center mr-4">
+        📍Pedreira Paulo Leminski <br />
       </h1>
 
-      <Image
-        src="/ESQUENTA.svg"
-        alt="ESQUENTA"
-        width={191}
-        height={107}
-        className="-mt-4 md:w-[358px] md:h-auto"
-      />
-
-      <div className="flex flex-col items-center justify-center  -mt-5 md:-mt-15 w-full text-[13px] md:text-2xl">
-        <div className="flex items-center justify-center   text-white font-bold">
-          <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-          <div className="flex items-center justify-center">
-            <div className="flex items-center justify-center mt-1">
-              Dunna Club
-            </div>
-            <Image
-              src="/logo-dunna.svg"
-              alt="logo-dunna"
-              width={34}
-              height={16}
-              className="ml-4 scale-125"
-            />
-          </div>
-        </div>
-
-        <div className="flex items-center justify-center   text-white font-bold -mt-2">
-          <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-          <div className="flex items-center justify-center mr-2 mt-1">
-            Open Bar Exclusivo
-          </div>
-        </div>
-
-        <div className="flex items-center justify-center   text-white font-bold -mt-2">
-          <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-          <div className="flex items-center justify-center mr-2 mt-1">
-            Djs Especiais
-          </div>
-        </div>
-
-        <div className="flex items-center justify-center   text-white font-bold -mt-2">
-          <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-          <div className="flex items-center justify-center">
-            <div className="flex items-center justify-center mt-1">
-              Espaço Beleza By Torriton
-            </div>
-            <Image
-              src="/logo-torriton.svg"
-              alt="logo-torriton"
-              width={56}
-              height={10}
-              className="ml-4"
-            />
-          </div>
-        </div>
-
-        <div className="flex items-center justify-center   text-white font-bold -mt-2">
-          <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-          <div className="flex items-center justify-center mr-2 mt-1">
-            Translado do esquenta ao evento
-          </div>
-        </div>
-
-        <Image
-          src="/CURITIBAFOLIA.svg"
-          alt="CURITIBAFOLIA"
-          width={195}
-          height={110}
-          className="-mt-4 md:w-[358px] md:h-auto"
-        />
-
-        <div className="flex items-center justify-center  text-white font-bold -mt-5 md:-mt-15">
-          <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-          <div className="flex items-center justify-center mr-2 mt-1">
-            Fila Diferenciada
-          </div>
-        </div>
-
-        <div className="flex items-center justify-center   text-white font-bold -mt-2">
-          <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-          <div className="flex items-center justify-center mr-2 mt-1">
-            Pulseira especial
-          </div>
-        </div>
-
-        <div className="flex items-center justify-center   text-white font-bold -mt-2">
-          <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-          <div className="flex items-center justify-center tracking-tight mt-1">
-            Área premium Formô com ativações e lounge
-          </div>
-        </div>
-
-        <div className="flex items-center justify-center   text-white font-bold -mt-2">
-          <Image src="/estrela.png" alt="estrela" width={39} height={37} />
-          <div className="flex items-center justify-center mr-2 mt-1">
-            Mais surpresas
-          </div>
-        </div>
-      </div>
+      <h1 className="text-white text-2xl md:text-4xl  font-bold tracking-tight mb-4">
+        🗓 29.11.2025
+      </h1>
     </>
   );
 }
