@@ -27,7 +27,7 @@ export default function Sucesso() {
         Sua participação no sorteio foi confirmada!
       </h1>
       <h1 className="text-white text-2xl md:text-4xl  font-bold tracking-tight mb-4">
-        EMBAIXADOR CLASSIC
+        O EMBAIXADOR CLASSIC
       </h1>
       <h1 className="text-white text-2xl md:text-4xl  font-bold tracking-tight mb-4 text-center mr-4">
         📍Pedreira Paulo Leminski <br />

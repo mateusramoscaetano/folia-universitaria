@@ -18,7 +18,7 @@ export function CardHeader() {
       </h1>
 
       <h1 className="text-white text-2xl md:text-5xl font-codec-cold font-bold tracking-tight">
-        Embaixador Classic
+        O Embaixador Classic
       </h1>
     </>
   );
